@@ -1,2 +1,2 @@
 # Blog project
-testing git
+testataan gittiä
