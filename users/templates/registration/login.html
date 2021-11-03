@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<p>login</p>
+{% block page_header %}
+<h2>Login</h2>
+{% endblock page_header %}
+
+{% block content %}
+<form action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+</form>
+{% endblock content %}
 </body>
 </html>

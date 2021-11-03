@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <title>Blog</title>
 </head>
+<style>
+    label, input {
+        display: block;
+    }
+    span.helptext {
+        display: none;
+    }
+</style>
+
 <body>
-<h1>Blog</h1>
+<h1>
+    <a href="{% url 'blog:home' %}">Blog</a>
+</h1>
 {% block page_header %}
 {% endblock page_header %}
 {% block content %}
