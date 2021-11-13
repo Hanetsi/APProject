@@ -16,7 +16,6 @@ class BlogPost(models.Model):
     """Unique parmeter makes sure there cannot be two blogs whit same name"""
     blogpost_title = models.CharField(max_length=200, unique=True)
     blogpost_content = models.CharField(max_length=2000)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now_add=True)
 
