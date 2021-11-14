@@ -2,8 +2,8 @@
 ## Suunnitellut ominaisuudet:
 
 #### - Käyttäjät
-- Admin ominaisuudet -EP
-- Käyttäjän luominen -EP
+- Admin ominaisuudet -EP (Done)
+- Käyttäjän luominen -EP (Done)
 - Käyttäjän poistaminen -EV
 - Käyttäjän profiilin muokkaus(mahdollisesti), profiilikuva/salasana -EP
 
@@ -12,5 +12,5 @@
 - Kommentointi ja tykkäys käyttäjällä -EP
 
 #### - Blogien kirjoitus
-- Käyttäjällä voi olla yksi tai useampi blogi -EV
+- Käyttäjällä voi olla yksi tai useampi blogi -EV (Done)
 - Käyttäjä voi luoda, muokata tai poistaa blogipostauksia blogissa -EP
