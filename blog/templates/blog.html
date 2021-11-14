@@ -19,6 +19,10 @@
     {% for post in posts %}
     <li>
         <a href="{% url 'blog:blogpost' post.id %}">{{ post.title }}</a>
+        {% if user.is_authenticated and user.id == owner.id %}
+                <a href="{% url 'blog:edit_post' post.id %}">Edit post</a>
+                <a href="{% url 'blog:delete_post' post.id %}">Delete post</a>
+        {% endif %}
     </li>
     {% empty %}
     <li>There are no posts in this blog yet.</li>

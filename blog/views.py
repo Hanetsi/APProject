@@ -103,3 +103,37 @@ def delete_blog(request, blog_id):
     else:
         context = {'blog': blog}
         return render(request, "confirm_delete_blog.html", context)
+
+
+@login_required
+def edit_post(request,post_id):
+    """View for editing a post in a blog."""
+    post = get_object_or_404(BlogPost, id=post_id)
+
+    blog = post.blog
+    if request.method != 'POST':
+        form = BlogPostForm(instance=post)
+    else:
+        form = BlogPostForm(instance=post, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:blog', blog_id=blog.id)
+
+    context = {'post':post,'blog':blog,'form':form}
+    return render(request,'edit_post.html',context)
+
+@login_required
+def delete_post(request, post_id):
+    """View for deleting a post"""
+    post = get_object_or_404(BlogPost, id=post_id)
+    blog = post.blog
+
+    if request.method == 'POST':
+        post.delete()
+        return redirect('blog:blog', blog_id=blog.id)
+    else:
+        context = {'post':post}
+        return render(request,'confirm_delete_post.html', context)
+
+
+
