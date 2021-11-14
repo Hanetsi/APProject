@@ -25,6 +25,11 @@
     {% endfor %}
 </ul>
 {{ blog.content }}
+
+{% if user.is_authenticated and user.id == owner.id%}
+    <a href="{% url 'blog:new_post' blog.id %}">New Post</a>
+{% endif %}
+
 {% endblock content %}
 </body>
 </html>

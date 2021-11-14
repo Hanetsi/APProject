@@ -20,7 +20,7 @@ class BlogPostForm(forms.ModelForm):
         model = BlogPost
         fields = ['title', 'content']
         labels = {
-            'title': 'Blog title',
+            'title': 'Post title',
             'content': '',
         }
 

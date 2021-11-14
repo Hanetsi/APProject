@@ -53,6 +53,23 @@ def new_blog(request):
     context = {'form': form}
     return render(request, "new_blog.html", context)
 
+@login_required
+def new_post(request,blog_id):
+    """View for adding a new post to a existing blog."""
+    blog = Blog.objects.get(id=blog_id)
+
+    if request.method != 'POST':
+        form = BlogPostForm()
+    else:
+        form = BlogPostForm(data=request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.blog = blog
+            new_post.save()
+            return redirect('blog:blog',blog_id=blog_id)
+
+    context = {'blog':blog, 'form':form }
+    return render(request, "new_post.html" ,context)
 
 @login_required
 def edit_blog(request, blog_id):
