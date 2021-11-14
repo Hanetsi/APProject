@@ -14,4 +14,4 @@
 #### - Blogien kirjoitus
 - Käyttäjällä voi olla yksi tai useampi blogi -EV (Done)
 - Käyttäjä voi luoda, muokata tai poistaa blogeja -EP (Done)
-- Käyttäjä voi luoda, muokata tai poistaa blogpostauksia -EV
+- Käyttäjä voi luoda, muokata tai poistaa blogpostauksia -EV (Done)
