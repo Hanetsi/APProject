@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from blog.models import Blog, BlogPost
 
 
 def register(request):
@@ -17,3 +19,14 @@ def register(request):
         'form': form
     }
     return render(request, "registration/register.html", context)
+
+
+def profile(request, user_id):
+    """Shows users profile. View depends on if the user views their own or someone else's profile"""
+    user = User.objects.get(id=user_id)
+    blogs = Blog.objects.filter(author=user).order_by("date_modified").reverse()
+    context = {
+        'owner': user,
+        'blogs': blogs
+    }
+    return render(request, "profile.html", context)

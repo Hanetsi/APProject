@@ -8,9 +8,9 @@
 {% block content %}
 
 <div>
-    <h2>Recent blogs:</h2>
+    <h2>All blogs:</h2>
     <ul>
-        {% for blog in recent_blogs %}
+        {% for blog in blogs %}
         <li>
             <a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a>
         </li>
