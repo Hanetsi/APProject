@@ -31,10 +31,15 @@ def all_blogs(request):
     context = {'blogs': blogs}
     return render(request, "all_blogs.html", context)
 
+
 def blog_post(request, post_id):
     """View for a single post"""
     post = get_object_or_404(BlogPost, id=post_id)
-    context = {'post': post}
+    owner = post.blog.author
+    context = {
+        'post': post,
+        'owner': owner
+    }
     return render(request, "post.html", context)
 
 
@@ -53,8 +58,9 @@ def new_blog(request):
     context = {'form': form}
     return render(request, "new_blog.html", context)
 
+
 @login_required
-def new_post(request,blog_id):
+def new_post(request, blog_id):
     """View for adding a new post to a existing blog."""
     blog = Blog.objects.get(id=blog_id)
 
@@ -68,8 +74,12 @@ def new_post(request,blog_id):
             new_post.save()
             return redirect('blog:blog',blog_id=blog_id)
 
-    context = {'blog':blog, 'form':form }
-    return render(request, "new_post.html" ,context)
+    context = {
+        'blog': blog,
+        'form': form
+    }
+    return render(request, "new_post.html", context)
+
 
 @login_required
 def edit_blog(request, blog_id):
@@ -119,8 +129,13 @@ def edit_post(request,post_id):
             form.save()
             return redirect('blog:blog', blog_id=blog.id)
 
-    context = {'post':post,'blog':blog,'form':form}
-    return render(request,'edit_post.html',context)
+    context = {
+        'post': post,
+        'blog': blog,
+        'form': form
+    }
+    return render(request, 'edit_post.html', context)
+
 
 @login_required
 def delete_post(request, post_id):
@@ -132,8 +147,8 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('blog:blog', blog_id=blog.id)
     else:
-        context = {'post':post}
-        return render(request,'confirm_delete_post.html', context)
+        context = {'post': post}
+        return render(request, 'confirm_delete_post.html', context)
 
 
 
