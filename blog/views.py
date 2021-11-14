@@ -54,7 +54,7 @@ def new_blog(request):
             new_blog = form.save(commit=False)
             new_blog.author = request.user
             new_blog.save()
-            return redirect('users:profile', user_id = request.user.id)
+            return redirect('users:profile', user_id=request.user.id)
     context = {'form': form}
     return render(request, "new_blog.html", context)
 
@@ -93,7 +93,7 @@ def edit_blog(request, blog_id):
         form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('users:profile', user_id=request.user.id)
+            return redirect('blog:blog', blog_id=blog.id)
     context = {
         'form': form,
         'blog': blog,
@@ -116,7 +116,7 @@ def delete_blog(request, blog_id):
 
 
 @login_required
-def edit_post(request,post_id):
+def edit_post(request, post_id):
     """View for editing a post in a blog."""
     post = get_object_or_404(BlogPost, id=post_id)
 
@@ -127,7 +127,7 @@ def edit_post(request,post_id):
         form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('blog:blog', blog_id=blog.id)
+            return redirect('blog:blogpost', post_id=post.id)
 
     context = {
         'post': post,

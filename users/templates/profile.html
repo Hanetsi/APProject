@@ -14,10 +14,6 @@
     {% for blog in blogs %}
         <li>
             <a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a>
-            {% if user.is_authenticated and user.id == owner.id %}
-                <a href="{% url 'blog:edit_blog' blog.id %}">Rename</a>
-                <a href="{% url 'blog:delete_blog' blog.id %}">Delete</a>
-            {% endif %}
         </li>
     {% empty %}
         <li>This profile has no blogs.</li>
