@@ -42,12 +42,15 @@ def blog_post(request, post_id):
         'likecount': likecount,
     }
     try:
-        # query returns an empty list if the user has not liked the post
-        user_has_liked = Like.objects.filter(post=post, user=request)
-        # so bool the return into context
-        context['user_has_liked'] = bool(user_has_liked)
+        # Checks if user has like and sets the context variable accordingly
+        user_has_liked = Like.objects.filter(post=post, user=request.user)
+        if not user_has_liked:
+            context['user_has_liked'] = False
+        else:
+            context['user_has_liked'] = True
     except TypeError as e:
-        # User is not logged in, since user is not logged and therefore can't have liked return False
+        # In case user is not logged in, above would give a TypeError.
+        # Just default the context variable to False
         context['user_has_liked'] = False
     return render(request, "post.html", context)
 
