@@ -16,6 +16,16 @@
 {% block content %}
 <p>{{ post.content }}</p>
 {{ blog.content }}
+<p>Likes: {{ likecount }}</p>
+{% if user.is_authenticated %}
+    <form action="{% url 'blog:like_post' post.id %}">
+        {% if not user_has_liked %}
+        <button type="submit">Like</button>
+        {% else %}
+        <button type="submit">Unlike</button>
+        {% endif %}
+    </form>
+{% endif %}
 {% endblock content %}
 </body>
 </html>

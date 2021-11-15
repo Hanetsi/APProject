@@ -24,3 +24,16 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title + " | " + str(self.date_modified.date())
+
+
+class Like(models.Model):
+    """Model of a like"""
+    # What post was liked
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
+    # Who liked
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # When the post was liked
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{self.user} likes {self.post}."

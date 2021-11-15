@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Blog, BlogPost
+from .models import Blog, BlogPost, Like
 from .forms import BlogForm, BlogPostForm
 
 
@@ -35,10 +35,20 @@ def blog_post(request, post_id):
     """View for a single post"""
     post = get_object_or_404(BlogPost, id=post_id)
     owner = post.blog.author
+    likecount = Like.objects.filter(post=post).count()
     context = {
         'post': post,
-        'owner': owner
+        'owner': owner,
+        'likecount': likecount,
     }
+    try:
+        # query returns an empty list if the user has not liked the post
+        user_has_liked = Like.objects.filter(post=post, user=request)
+        # so bool the return into context
+        context['user_has_liked'] = bool(user_has_liked)
+    except TypeError as e:
+        # User is not logged in, since user is not logged and therefore can't have liked return False
+        context['user_has_liked'] = False
     return render(request, "post.html", context)
 
 
@@ -148,3 +158,20 @@ def delete_post(request, post_id):
     else:
         context = {'post': post}
         return render(request, 'confirm_delete_post.html', context)
+
+
+@login_required
+def like(request, post_id):
+    """When user likes a post."""
+    post = get_object_or_404(BlogPost, id=post_id)
+    user = request.user
+    # Tries to get like, if it doesn't exist create it.
+    new_like, created = Like.objects.get_or_create(post=post, user=user)
+    if not created:
+        # User had already like and wants to unlike
+        new_like.delete()
+    # Return user to the post
+    return redirect('blog:blogpost', post_id=post.id)
+
+
+
