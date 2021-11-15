@@ -5,11 +5,11 @@
 - Admin ominaisuudet -EP (Done)
 - Käyttäjän luominen -EP (Done)
 - Käyttäjän poistaminen -EV (Done)
-- Käyttäjän profiilin salasanan vaihtaminen -EP
+- Käyttäjän profiilin salasanan vaihtaminen -EP (Done)
 
 #### - Blogien lukeminen
 - Lukeminen ilman käyttäjää -EV (Done)
-- Kommentointi ja tykkäys käyttäjällä -EP
+- Kirjautuneet käyttäjät voivat tykätä postauksista -EP (Done)
 
 #### - Blogien kirjoitus
 - Käyttäjällä voi olla yksi tai useampi blogi -EV (Done)
