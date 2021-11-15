@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from .models import Blog, BlogPost
 from .forms import BlogForm, BlogPostForm
 
@@ -72,7 +71,7 @@ def new_post(request, blog_id):
             new_post = form.save(commit=False)
             new_post.blog = blog
             new_post.save()
-            return redirect('blog:blog',blog_id=blog_id)
+            return redirect('blog:blog', blog_id=blog_id)
 
     context = {
         'blog': blog,
@@ -149,6 +148,3 @@ def delete_post(request, post_id):
     else:
         context = {'post': post}
         return render(request, 'confirm_delete_post.html', context)
-
-
-
