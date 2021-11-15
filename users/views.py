@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.http import Http404
 from blog.models import Blog, BlogPost
 
 
@@ -38,6 +39,8 @@ def delete_user(request, user_id):
     """View for deleting user's profile"""
     # Fetch user in question
     user = get_object_or_404(User, id=user_id)
+    if user != request.user:
+        raise Http404
     # If the user has pressed the confirmation button
     if request.method == "POST":
         user.delete()
