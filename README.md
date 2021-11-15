@@ -4,7 +4,7 @@
 #### - Käyttäjät
 - Admin ominaisuudet -EP (Done)
 - Käyttäjän luominen -EP (Done)
-- Käyttäjän poistaminen -EV
+- Käyttäjän poistaminen -EV (Done)
 - Käyttäjän profiilin salasanan vaihtaminen -EP
 
 #### - Blogien lukeminen
@@ -21,3 +21,4 @@
 - Django avaimen piilottaminen ympäristömuuttujan taakse
 - Tyylitys
 - Heroku julkaisu
+- Salasanan validointi takaisin päälle

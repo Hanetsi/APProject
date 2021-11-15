@@ -21,6 +21,7 @@
 </ul>
 {% if user.is_authenticated and user.id == owner.id%}
     <a href="{% url 'blog:new_blog' %}">New blog</a>
+    <a href="{% url 'users:delete_user' user.id %}">Delete account</a>
 {% endif %}
 {% endblock content %}
 </body>

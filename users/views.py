@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from blog.models import Blog, BlogPost
@@ -30,3 +31,17 @@ def profile(request, user_id):
         'blogs': blogs
     }
     return render(request, "profile.html", context)
+
+
+@login_required
+def delete_user(request, user_id):
+    """View for deleting user's profile"""
+    # Fetch user in question
+    user = get_object_or_404(User, id=user_id)
+    # If the user has pressed the confirmation button
+    if request.method == "POST":
+        user.delete()
+        return redirect('blog:home')
+    else:
+        context = {'user': user}
+        return render(request, "confirm_delete_user.html", context)
