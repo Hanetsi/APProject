@@ -15,7 +15,8 @@
 - Käyttäjällä voi olla yksi tai useampi blogi -EV (Done)
 - Käyttäjä voi luoda, muokata tai poistaa blogeja -EP (Done)
 - Käyttäjä voi luoda, muokata tai poistaa blogpostauksia -EV (Done)
-- Blogin ja postauksien editoinnin ja poistamisen estäminen vääriltä käyttäjiltä -EV
+- Blogin ja postauksien editoinnin ja poistamisen estäminen vääriltä käyttäjiltä -EV (Done)
+- Käyttäjän poistamisen estäminen -EV (Done)
 
 #### - Muuta
 - Django avaimen piilottaminen ympäristömuuttujan taakse

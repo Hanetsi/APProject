@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+
 {% block page_header %}
-<h2>{{ owner }}'s blogs.</h2>
+<div class="alert alert-info" role="alert">
+  <h2>{{ owner }}'s blogs:</h2>
+</div>
 {% endblock page_header %}
 
 {% block content %}
 <ul>
     {% for blog in blogs %}
-        <li>
-            <a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a>
-        </li>
+        <a href="{% url 'blog:blog' blog.id %}" class="btn btn-primary btn-block" role="button">{{ blog.name }}</a>
     {% empty %}
-        <li>This profile has no blogs.</li>
+        <div class="alert alert-primary" role="alert">
+            This profile has no blogs.
+        </div>
     {% endfor %}
 </ul>
 {% if user.is_authenticated and user.id == owner.id%}
-    <a href="{% url 'blog:new_blog' %}">New blog</a>
-    <a href="{% url 'password_change' %}">Change password</a>
-    <a href="{% url 'users:delete_user' user.id %}">Delete account</a>
+    <a href="{% url 'blog:new_blog' %}" class="btn btn-primary" role="button">New blog</a>
+    <a href="{% url 'password_change' %}" class="btn btn-warning" role="button">Change password</a>
+    <a href="{% url 'users:delete_user' user.id %}" class="btn btn-danger" role="button">Delete account</a>
 {% endif %}
 {% endblock content %}
-</body>
-</html>

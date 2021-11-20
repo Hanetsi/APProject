@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+
+{% load bootstrap4 %}
+
 {% block page_header %}
 <h2>Register a new account</h2>
 {% endblock page_header %}
@@ -12,9 +9,9 @@
 {% block content %}
 <form action="{% url 'users:register' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button>Register</button>
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-success">Register</button>
+    {% endbuttons %}
 </form>
 {% endblock content %}
-</body>
-</html>

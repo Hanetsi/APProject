@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+{% load bootstrap4 %}
+
 {% block page_header %}
-<h2>Edit {{ post.name }}</h2>
+<div class="alert alert-warning" role="alert">
+  <h2>Edit {{ post.name }}</h2>
+</div>
 {% endblock page_header %}
 
 {% block content %}
 <form action="{% url 'blog:edit_post' post.id %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Save changes</button>
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-success">Save changes</button>
+    {% endbuttons %}
 </form>
 {% endblock content %}
-</body>
-</html>

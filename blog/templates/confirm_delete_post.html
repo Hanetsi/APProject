@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+
 {% block page_header %}
-<h2>Are you sure you want to delete {{ post.title }}?</h2>
+<div class="alert alert-danger" role="alert">
+  <h2>Are you sure you want to delete {{ post.title }}?</h2>
+</div>
 {% endblock page_header %}
 
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    <input type="submit" name="confirm" value="Yes, delete {{ post.title }}"/>
+    <input class="btn btn-danger" type="submit" name="confirm" value="Yes, delete {{ post.title }}"/>
+    <a href="{% url 'blog:blogpost' post.id %}" class="btn btn-warning">Return</a>
 </form>
 
 {% endblock content %}
-</body>
-</html>

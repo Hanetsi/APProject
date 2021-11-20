@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-{% block content %}
 
+{% block content %}
 <div>
-    <h2>All blogs:</h2>
+    <div class="alert alert-info" role="alert">
+        <h2>All blogs:</h2>
+    </div>
     <ul>
         {% for blog in blogs %}
-        <li>
-            <a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a>
-        </li>
+            <a href="{% url 'blog:blog' blog.id %}" class="btn btn-primary btn-block" role="button">{{ blog.name }} | {{ blog.author }}</a>
         {% empty %}
         <li>There are no blog posts yet.</li>
         {% endfor %}
     </ul>
 </div>
 {% endblock content %}
-</body>
-</html>

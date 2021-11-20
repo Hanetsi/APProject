@@ -39,6 +39,7 @@ def delete_user(request, user_id):
     """View for deleting user's profile"""
     # Fetch user in question
     user = get_object_or_404(User, id=user_id)
+    # Check if user is logged in with the user they are trying to delete.
     if user != request.user:
         raise Http404
     # If the user has pressed the confirmation button
