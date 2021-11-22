@@ -19,7 +19,7 @@ def blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     posts = BlogPost.objects.all().filter(blog=blog).order_by('date_modified').reverse()
     context = {
-        'owner': blog.author,
+        'owner': blog.author,re
         'blog': blog,
         'posts': posts
     }

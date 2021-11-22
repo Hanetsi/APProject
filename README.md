@@ -18,8 +18,8 @@
 - Blogin ja postauksien editoinnin ja poistamisen estäminen vääriltä käyttäjiltä -EV (Done)
 - Käyttäjän poistamisen estäminen -EV (Done)
 
-#### - Muuta
-- Django avaimen piilottaminen ympäristömuuttujan taakse
-- Tyylitys
+#### - Lopuksi
+- Tyylit (Done)
+- Tyylin loppuhionta
+- Asetusten korjaus julkaisukelpoiseksi
 - Heroku julkaisu
-- Salasanan validointi takaisin päälle
