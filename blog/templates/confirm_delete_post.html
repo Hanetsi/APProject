@@ -2,15 +2,16 @@
 
 {% block page_header %}
 <div class="alert alert-danger" role="alert">
-  <h2>Are you sure you want to delete {{ post.title }}?</h2>
+  <h3>Are you sure you want to delete {{ post.title }}?</h3>
 </div>
 {% endblock page_header %}
 
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
+    <a class="btn btn-secondary" href="{% url 'blog:blogpost' post.id %}" >Return</a>
     <input class="btn btn-danger" type="submit" name="confirm" value="Yes, delete {{ post.title }}"/>
-    <a href="{% url 'blog:blogpost' post.id %}" class="btn btn-warning">Return</a>
+
 </form>
 
 {% endblock content %}

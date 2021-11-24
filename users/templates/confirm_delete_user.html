@@ -9,7 +9,7 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
+    <a class="btn btn-secondary" href="{% url 'users:profile' user.id %}" >Return</a>
     <input class="btn btn-danger" type="submit", name="confirm" value="Yes, delete {{ user }}"/>
-    <a href="{% url 'users:profile' user.id %}" class="btn btn-warning">Return</a>
 </form>
 {% endblock content %}

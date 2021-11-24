@@ -19,7 +19,7 @@ def blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     posts = BlogPost.objects.all().filter(blog=blog).order_by('date_modified').reverse()
     context = {
-        'owner': blog.author,re
+        'owner': blog.author,
         'blog': blog,
         'posts': posts
     }
@@ -110,7 +110,7 @@ def edit_blog(request, blog_id):
         form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('blog:blog', blog_id=blog.id)
+            return redirect('users:profile', user_id=blog.author.id)
     context = {
         'form': form,
         'blog': blog,
@@ -151,7 +151,7 @@ def edit_post(request, post_id):
         form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('blog:blogpost', post_id=post.id)
+            return redirect('blog:blog', blog_id=post.blog.id)
 
     context = {
         'post': post,

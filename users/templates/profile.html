@@ -1,24 +1,39 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-<div class="alert alert-info" role="alert">
-  <h2>{{ owner }}'s blogs:</h2>
-</div>
+<div class="jumbotron">
+    {% if user.is_authenticated and user.id == profile.id %}
+    <h1>My profile</h1>
+    <a class="btn btn-primary mr-1" href="{% url 'blog:new_blog' %}" role="button">New blog</a>
+    <a class="btn btn-warning btn-sm mr-1" href="{% url 'password_change' %}"  role="button">Change password</a>
+    <a class="btn btn-danger btn-sm mr-1" href="{% url 'users:delete_user' user.id %}"  role="button">Delete account</a>
+    {% else %}
+    <h1>{{ profile.username }}'s profile</h1>
+    {% endif %}
 {% endblock page_header %}
 
 {% block content %}
-<ul>
+<div container>
     {% for blog in blogs %}
-        <a href="{% url 'blog:blog' blog.id %}" class="btn btn-primary btn-block" role="button">{{ blog.name }}</a>
-    {% empty %}
-        <div class="alert alert-primary" role="alert">
-            This profile has no blogs.
+    <div class="row justify-content-center mb-2">
+        <div class="col-sm-8">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h4 class="card-title">{{ blog.name }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ blog.date_modified }}</h6>
+                    <p class="card-text">{{ blog.description }}...</p>
+                    <a class="btn btn-primary mr-1" href="{% url 'blog:blog' blog.id %}" role="button">Checkout blog</a>
+                    {% if user.is_authenticated and user.id == blog.author.id %}
+                    <a class="btn btn-warning btn-sm mr-1" href="{% url 'blog:edit_blog' blog.id %}" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm mr-1" href="{% url 'blog:delete_blog' blog.id %}" role="button">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
+
+    </div>
+    {% empty %}
+    <h4>There are no blogs yet.</h4>
     {% endfor %}
-</ul>
-{% if user.is_authenticated and user.id == owner.id%}
-    <a href="{% url 'blog:new_blog' %}" class="btn btn-primary" role="button">New blog</a>
-    <a href="{% url 'password_change' %}" class="btn btn-warning" role="button">Change password</a>
-    <a href="{% url 'users:delete_user' user.id %}" class="btn btn-danger" role="button">Delete account</a>
-{% endif %}
+</div>
 {% endblock content %}

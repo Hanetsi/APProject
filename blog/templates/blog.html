@@ -1,42 +1,37 @@
 {% extends 'base.html' %}
 
 {% block page_header %}
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h2 class="display-8"><a href="{% url 'users:profile' blog.author.id %}">{{ blog.author }}</a> | {{ blog.name }}</h2>
-        <p class="lead">{{ blog.date_added.date }}</p>
-        {% if blog.date_modified != blog.date_added %}
-        <p class="lead">Modified: {{ blog.date_modified }}</p>
-        {% endif %}
-
-    {% if user.is_authenticated and user.id == owner.id %}
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-primary" href="{% url 'blog:edit_blog' blog.id %}"
-               role="button">Rename blog</a>
-            <a class="btn btn-danger" href="{% url 'blog:delete_blog' blog.id %}"
-               role="button">Delete blog</a>
-        </div>
+<div class="jumbotron">
+    <h3>{{ blog.author }}'s blog</h3>
+    <p class="lead text-muted">{{ blog.date_modified }} by <a href="{% url 'users:profile' blog.author.id %}">{{ blog.author }}</a></p>
+    <p>{{ blog.description }}</p>
+    {% if user.is_authenticated and user.id == blog.author.id %}
+    <a class="btn btn-primary mr-1" href="{% url 'blog:new_post' blog.id %}" role="button">New post</a>
     {% endif %}
-    </div>
-</div>
 {% endblock page_header %}
 
 {% block content %}
-<h3>Posts:</h3>
-<ul>
+<div container>
     {% for post in posts %}
-        <a href="{% url 'blog:blogpost' post.id %}" class="btn btn-primary btn-block" role="button">{{ post.title }}</a>
-    {% empty %}
-    <div class="alert alert-primary" role="alert">
-    There are no posts in this blog yet.
+    <div class="row justify-content-center mb-2">
+        <div class="col-sm-8">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h4 class="card-title">{{ post.title }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ post.date_modified }} by <a href="{% url 'blog:blogpost' post.id %}">{{ blog.author }}</a></h6>
+                    <p class="card-text">{{ post.content|slice:":50" }}...</p>
+                    <a class="btn btn-primary mr-1" href="{% url 'blog:blogpost' post.id %}" role="button">Read</a>
+                    {% if user.is_authenticated and user.id == blog.author.id %}
+                    <a class="btn btn-warning btn-sm mr-1" href="{% url 'blog:edit_post' post.id %}" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm mr-1" href="{% url 'blog:delete_post' post.id %}" role="button">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
     </div>
+    {% empty %}
+    <h4>There are no blogs yet.</h4>
     {% endfor %}
-</ul>
-{{ blog.content }}
-
-{% if user.is_authenticated and user.id == owner.id%}
-    <a class="btn btn-success" href="{% url 'blog:new_post' blog.id %}"
-        role="button">New post</a>
-{% endif %}
-
+</div>
 {% endblock content %}

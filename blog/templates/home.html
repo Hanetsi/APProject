@@ -5,18 +5,7 @@
     <h1>Welcome to BlogApp</h1>
     <p class="lead">In BlogApp you can create your own blogs on anything you want.
     Other people can read your blogs and you can read theirs.</p>
-    <button class="btn btn-lg btn-primary" href="{% url 'users:register' %}">Register &raquo;</button>
-</div>
-<div>
-    <h3>Here is a few recent blogs</h3>
-    <ul class="list-group list-group-flush">
-        {% for blog in recent_blogs %}
-        <li class="list-group-item">
-            <h4><a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a></h4>
-        </li>
-        {% empty %}
-        <li class="list-group-item"><h4>There are no blog posts yet.</h4></li>
-        {% endfor %}
-    </ul>
+    <a class="btn btn-lg btn-primary" href="{% url 'blog:all_blogs' %}">Browse blogs &raquo;</a>
+    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}">Register &raquo;</a>
 </div>
 {% endblock content %}

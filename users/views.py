@@ -28,7 +28,7 @@ def profile(request, user_id):
     user = User.objects.get(id=user_id)
     blogs = Blog.objects.filter(author=user).order_by("date_modified").reverse()
     context = {
-        'owner': user,
+        'profile': user,
         'blogs': blogs
     }
     return render(request, "profile.html", context)

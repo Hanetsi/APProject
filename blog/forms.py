@@ -8,9 +8,10 @@ class BlogForm(forms.ModelForm):
     """Form for creating or editing blogs."""
     class Meta:
         model = Blog
-        fields = ['name']
+        fields = ['name', 'description']
         labels = {
-            'name': 'Name for new blog'
+            'name': 'Name for new blog',
+            'description': 'A short blog description'
         }
 
 

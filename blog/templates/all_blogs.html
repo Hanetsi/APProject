@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
+{% block page_header %}
+<h3>All blogs:</h3>
+{% endblock page_header %}
 
 {% block content %}
-<div>
-    <div class="list-group list-group-flush">
-        <h2>All blogs:</h2>
+<div container>
+    {% for blog in blogs %}
+    <div class="row justify-content-center mb-2">
+        <div class="col-sm-8">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h4 class="card-title">{{ blog.name }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ blog.date_modified }} by <a href="{% url 'users:profile' blog.author.id %}">{{ blog.author }}</a></h6>
+                    <p class="card-text">{{ blog.description}}...</p>
+                    <a class="btn btn-primary" href="{% url 'blog:blog' blog.id %}" role="button">Checkout blog</a>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <ul>
-        {% for blog in blogs %}
-            <a href="{% url 'blog:blog' blog.id %}" class="list-group-item" role="button">{{ blog.name }} | {{ blog.author }}</a>
-        {% empty %}
-        <li>There are no blog posts yet.</li>
-        {% endfor %}
-    </ul>
+    {% empty %}
+    <h4>There are no blogs yet.</h4>
+    {% endfor %}
 </div>
 {% endblock content %}

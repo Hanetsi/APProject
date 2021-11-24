@@ -6,11 +6,12 @@ class Blog(models.Model):
     """Model for a blog. Blog will consist of posts with many to one relationship."""
     name = models.CharField(max_length=100, unique=True, default="")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField(default="")
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " | " + str(self.date_added.date())
+        return self.name
 
 
 class BlogPost(models.Model):
@@ -23,7 +24,7 @@ class BlogPost(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + " | " + str(self.date_modified.date())
+        return self.title
 
 
 class Like(models.Model):
