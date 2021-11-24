@@ -20,6 +20,6 @@
 
 #### - Lopuksi
 - Tyylit (Done)
-- Tyylin loppuhionta
+- Tyylin loppuhionta (Done)
 - Asetusten korjaus julkaisukelpoiseksi
 - Heroku julkaisu
