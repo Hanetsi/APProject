@@ -21,5 +21,5 @@
 #### - Lopuksi
 - Tyylit (Done)
 - Tyylin loppuhionta (Done)
-- Asetusten korjaus julkaisukelpoiseksi
-- Heroku julkaisu
+- Asetusten korjaus julkaisukelpoiseksi (Done)
+- Heroku julkaisu (Done)
